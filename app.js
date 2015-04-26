@@ -23,6 +23,10 @@ app.get('/food-types', function (request, response) {
   response.json(trucks.getFoodTypes());
 });
 
+app.get('/food-types/:name', function (request, response) {
+  response.json(trucks.filterByFoodType(request.params.name));
+});
+
 app.listen(80, function () {
   console.log('listening on port 80');
 });

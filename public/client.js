@@ -11,7 +11,7 @@ $(function () {
   $.get('/food-types', function (foods) {
     var foodsList = [];
     foods.forEach(function (food) {
-      foodsList.push('<li class="food" style="display:none" ><a href="' + food + '/">' + food + '</a></li>');
+      foodsList.push('<li class="food" style="display:none" ><a href="/food-types/' + food + '/">' + food + '</a></li>');
     });
     $('.types-list').append(foodsList);
   });
@@ -30,14 +30,19 @@ $(function () {
 
   $('.types-list').click(function () {
     $(".food").toggle("slow");
-  });
 
+    $('.food').click(function (e) {
+      e.preventDefault();
+      var href = $(this).find('a:first').attr('href');
+      $('right').empty();
+      loadAJAX(href)
+    });
+  });
 
 });
 
 function parseJSON (data) {
   'use strict'
-  console.log(data);
   $('.right').text(JSON.stringify(data));
 };
 
@@ -49,7 +54,6 @@ function loadAJAX (url) {
     url: url,
     success: parseJSON
   });
-
 }
 
 

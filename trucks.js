@@ -517,15 +517,24 @@ function getTrucks() {
 }
 
 function getTruck(name) {
-
+    
 	return _.filter(foodTrucks, function (truck) {
 		return truck.name === name;
 	});
 }
 
 function getFoodTypes() {
+    
+    // create an array of all the types from all the trucks
+    var allFoodTypes = [];
 
-	return _.union(foodTrucks.type);
+    foodTrucks.forEach( function(truck) {
+        allFoodTypes.push(truck.type);
+    });
+
+    // create a list of all the unique food types
+    console.log('The food types are: ' + _.union(allFoodTypes));
+	return _.union(allFoodTypes);
 }
 
 function filterByDay(dayName) { 

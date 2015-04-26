@@ -527,7 +527,20 @@ var getFoodTypes = function (){
   return _.union(truckTypes);
 };
 
+var filterByDay = function (day) {
+  var i;
+  var filteredTrucks = _.filter(foodTrucks, function(truck) {
+
+    for (i = 0;  i < truck.schedule.length; i++) {
+      if(day === truck.schedule[i]) {
+        return true;
+      }
+    }
+  });
+  return filteredTrucks;
+};
 
 module.exports.getTrucks = getTrucks;
 module.exports.getTruck = getTruck;
 module.exports.getFoodTypes = getFoodTypes;
+module.exports.filterByDay = filterByDay;

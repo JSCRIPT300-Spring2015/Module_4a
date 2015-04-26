@@ -514,7 +514,6 @@ var getTrucks = function () {
 	return foodTrucks;
 };
 
-
 var getTruck = function (name) {
   var truck = _.find(foodTrucks, function (foodTruck) {
     return foodTruck.name === name;
@@ -522,6 +521,13 @@ var getTruck = function (name) {
   return truck;
 };
 
+var getFoodTypes = function (){
+  var truckTypes = _.pluck(foodTrucks, 'type');
+  truckTypes = _.flatten(truckTypes);
+  return _.union(truckTypes);
+};
+
+
 module.exports.getTrucks = getTrucks;
 module.exports.getTruck = getTruck;
-
+module.exports.getFoodTypes = getFoodTypes;

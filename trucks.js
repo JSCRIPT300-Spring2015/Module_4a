@@ -524,7 +524,7 @@ var getTruck = function (name) {
 var getFoodTypes = function (){
   var truckTypes = _.pluck(foodTrucks, 'type');
   truckTypes = _.flatten(truckTypes);
-  return _.union(truckTypes);
+  return _.union(truckTypes).sort();
 };
 
 var filterByDay = function (day) {

@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var foodTrucks = [
 	{
 		name: '314 PIE',
@@ -509,3 +510,10 @@ var foodTrucks = [
 // getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
 // filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
 // filterByFoodType(foodType) - return trucks with associated 'foodType'
+var getTrucks = function () {
+	var truckNames = _.pluck(foodTrucks, 'name');
+	return truckNames;
+};
+
+
+module.exports.getTrucks = getTrucks;

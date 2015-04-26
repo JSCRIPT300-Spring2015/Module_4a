@@ -11,7 +11,7 @@ $(function () {
   $.get('/food-types', function (foods) {
     var foodsList = [];
     foods.forEach(function (food) {
-      foodsList.push('<li class="food" style="display:none" ><a href="/food-types/' + food + '/">' + food + '</a></li>');
+      foodsList.push('<li class="food" style="display:none" ><a href="/food-types/' + encodeURIComponent(food) + '/">' + food + '</a></li>');
     });
     $('.types-list').append(foodsList);
   });
@@ -22,7 +22,6 @@ $(function () {
       .click(function (e) {
         e.preventDefault();
         var href = $(this).find('a:first').attr('href');
-        $('right').empty();
         loadAJAX(href);
       });
   });
@@ -32,7 +31,6 @@ $(function () {
       .click(function (e) {
         e.preventDefault();
         var href = $(this).find('a:first').attr('href');
-        $('right').empty();
         loadAJAX(href);
       });
   });
@@ -40,7 +38,38 @@ $(function () {
 
 function parseJSON (data) {
   'use strict';
-  $('.right').text(JSON.stringify(data));
+  var attribute;
+  var trucks = [];
+  var truck;
+  $('.right').empty();
+  if (data.length === undefined || data.length === 1) {
+    attribute = [];
+    if (data.length === 1) {
+      data = data[0];
+    }
+    trucks = $('<ul><h3><strong>' + data.name + '</strong></h3></ul>');
+    delete data.name;
+    for (var k in data) {
+      if (data.hasOwnProperty(k)) {
+        attribute.push('<li>' + k + ': ' + data[k] + '</li>');
+      }
+    }
+    trucks.append(attribute);
+    $('.right').append(trucks);
+  } else {
+    data.forEach( function (aTruck) {
+      truck = $('<ul><h3><strong>' + aTruck.name + '</strong></h3></ul>');
+      delete aTruck.name;
+      for (var k in aTruck) {
+        if (aTruck.hasOwnProperty(k)) {
+          truck.append('<li><strong>' + k + '</strong>: ' + aTruck[k] + '</li>');
+        }
+      }
+      truck.append(attribute);
+      $('.right').append(truck);
+      $('.right').append('<hr/>');
+    });
+  }
 }
 
 function loadAJAX (url) {

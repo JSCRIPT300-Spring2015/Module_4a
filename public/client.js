@@ -19,30 +19,34 @@ $(function () {
   $('.truck-list').click(function () {
 
     $(".truck").toggle("slow");
+
+    $('.truck').click(function (e) {
+      e.preventDefault();
+      var href = $(this).find('a:first').attr('href');
+      $('right').empty();
+      loadAJAX(href)
+    });
   });
 
   $('.types-list').click(function () {
     $(".food").toggle("slow");
   });
 
-  $('.truck').click(function (e) {
-    console.log(e);
-    e.preventDefault();
-    $('right').empty();
-  });
+
 });
 
-function parseJSON () {
+function parseJSON (data) {
   'use strict'
+  console.log(data);
+  $('.right').text(JSON.stringify(data));
 };
 
-function loadAJAX (filter) {
+function loadAJAX (url) {
   'use strict';
-  console.log('schoolapi.php?' + filter);
   $.ajax({
     type: 'GET',
     dataType: 'json',
-    url: "schoolapi.php?" + filter,
+    url: url,
     success: parseJSON
   });
 

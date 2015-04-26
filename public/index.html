@@ -3,11 +3,29 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Food Truck Finder</title>
+    <style>
+        .right {
+            position: absolute;
+            right: 0px;
+            background-color: #b0e0e6;
+        }
+
+        .left{
+            position: absolute;
+            left: 0px;
+            width: 300px;
+        }
+    </style>
 </head>
 <body>
 	<h1>Food Truck Finder</h1>
-	<ul class="truck-list"></ul>
-	
+    <div class="left">
+        <ul class="truck-list"><b>Food Trucks</b></ul>
+        <ul class="types-list"><b>Food Types</b></ul>
+    </div>
+    <div class="right">
+
+    </div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="client.js"></script>
 </body>

@@ -515,10 +515,9 @@ var getTrucks = function () {
 };
 
 var getTruck = function (name) {
-  var truck = _.find(foodTrucks, function (foodTruck) {
+  return _.find(foodTrucks, function (foodTruck) {
     return foodTruck.name === name;
   });
-  return truck;
 };
 
 var getFoodTypes = function (){
@@ -529,7 +528,7 @@ var getFoodTypes = function (){
 
 var filterByDay = function (day) {
   var i;
-  var filteredTrucks = _.filter(foodTrucks, function(truck) {
+  return _.filter(foodTrucks, function(truck) {
 
     for (i = 0;  i < truck.schedule.length; i++) {
       if(day === truck.schedule[i]) {
@@ -537,14 +536,12 @@ var filterByDay = function (day) {
       }
     }
   });
-  return filteredTrucks;
 };
 
 var filterByFoodType = function (foodType) {
-  var trucks = _.filter(foodTrucks, function (foodTruck) {
+  return  _.filter(foodTrucks, function (foodTruck) {
     return _.contains(foodTruck.type, foodType);
   });
-  return trucks;
 };
 
 module.exports.getTrucks = getTrucks;

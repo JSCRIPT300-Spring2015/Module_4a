@@ -6,9 +6,8 @@ var express = require('express');
 var trucks = require('./trucks');
 var app = express();
 
+app.use(express.static('public'));
 app.get('/', function (request, response) {
-
-  // redirect to /food-trucks instead
   response.redirect('/trucks');
 });
 
@@ -24,6 +23,6 @@ app.get('/food-types', function (request, response) {
   response.json(trucks.getFoodTypes());
 });
 
-app.listen(3000, function () {
-  console.log('listening on port 3000');
+app.listen(80, function () {
+  console.log('listening on port 80');
 });

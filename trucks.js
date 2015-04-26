@@ -511,9 +511,17 @@ var foodTrucks = [
 // filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
 // filterByFoodType(foodType) - return trucks with associated 'foodType'
 var getTrucks = function () {
-	var truckNames = _.pluck(foodTrucks, 'name');
-	return truckNames;
+	return foodTrucks;
 };
 
 
+var getTruck = function (name) {
+  var truck = _.find(foodTrucks, function (foodTruck) {
+    return foodTruck.name === name;
+  });
+  return truck;
+};
+
 module.exports.getTrucks = getTrucks;
+module.exports.getTruck = getTruck;
+

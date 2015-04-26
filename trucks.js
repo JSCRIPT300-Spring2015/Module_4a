@@ -530,7 +530,6 @@ var getFoodTypes = function (){
 var filterByDay = function (day) {
   var i;
   return _.filter(foodTrucks, function(truck) {
-
     for (i = 0;  i < truck.schedule.length; i++) {
       if(day === truck.schedule[i]) {
         return true;

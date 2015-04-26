@@ -513,7 +513,7 @@ var foodTrucks = [
 // filterByFoodType(foodType) - return trucks with associated 'foodType'
 
 function getTrucks() {
-
+    return foodTrucks;
 }
 
 function getTruck(name) {

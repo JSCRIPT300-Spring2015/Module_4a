@@ -51,7 +51,7 @@ function parseJSON (data) {
     delete data.name;
     for (var k in data) {
       if (data.hasOwnProperty(k)) {
-        attribute.push('<li>' + k + ': ' + data[k] + '</li>');
+        attribute.push('<li><strong>' + k + '</strong>: ' + data[k] + '</li>');
       }
     }
     trucks.append(attribute);

@@ -18,33 +18,30 @@ $(function () {
 
   $('.truck-list').click(function () {
 
-    $(".truck").toggle("slow");
-
-    $('.truck').click(function (e) {
-      e.preventDefault();
-      var href = $(this).find('a:first').attr('href');
-      $('right').empty();
-      loadAJAX(href)
-    });
+    $(".truck").toggle("slow")
+      .click(function (e) {
+        e.preventDefault();
+        var href = $(this).find('a:first').attr('href');
+        $('right').empty();
+        loadAJAX(href);
+      });
   });
 
   $('.types-list').click(function () {
-    $(".food").toggle("slow");
-
-    $('.food').click(function (e) {
-      e.preventDefault();
-      var href = $(this).find('a:first').attr('href');
-      $('right').empty();
-      loadAJAX(href)
-    });
+    $(".food").toggle("slow")
+      .click(function (e) {
+        e.preventDefault();
+        var href = $(this).find('a:first').attr('href');
+        $('right').empty();
+        loadAJAX(href);
+      });
   });
-
 });
 
 function parseJSON (data) {
-  'use strict'
+  'use strict';
   $('.right').text(JSON.stringify(data));
-};
+}
 
 function loadAJAX (url) {
   'use strict';

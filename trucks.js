@@ -540,7 +540,15 @@ var filterByDay = function (day) {
   return filteredTrucks;
 };
 
+var filterByFoodType = function (foodType) {
+  var trucks = _.filter(foodTrucks, function (foodTruck) {
+    return _.contains(foodTruck.type, foodType);
+  });
+  return trucks;
+};
+
 module.exports.getTrucks = getTrucks;
 module.exports.getTruck = getTruck;
 module.exports.getFoodTypes = getFoodTypes;
 module.exports.filterByDay = filterByDay;
+module.exports.filterByFoodType = filterByFoodType;

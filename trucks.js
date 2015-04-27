@@ -1,3 +1,4 @@
+var _ = require('lodash')
 var foodTrucks = [
 	{
 		name: '314 PIE',
@@ -503,6 +504,38 @@ var foodTrucks = [
 	}
 ];
 
+function getTrucks() {
+	return _.map(foodTrucks, function(item) {
+		return item;
+	})
+}
+
+function getTruck(truck) {
+	return _.filter(foodTrucks, function(item) {
+		if(item.name === truck) {return item;}
+		return;
+	});
+}
+
+function getFoodTypes() {
+	var allItems = _.flattenDeep(_.pluck(foodTrucks, 'type'));
+	return _.uniq(allItems);
+}
+
+function filterByFoodType(type) {
+	return _.filter(foodTrucks, function(item) {
+		var item = _.filter(item.type, function(loop) {
+			if (loop === type) {return true;}
+		}) 
+		if(item[0]) {return true;}
+	})
+}
+module.exports = {
+	getTrucks: getTrucks,
+	getTruck: getTruck,
+	getFoodTypes: getFoodTypes,
+	filterByFoodType: filterByFoodType
+}
 // this module should support the following methods:
 // getTrucks() - return all trucks
 // getTruck(name) - return the truck object matching 'name'

@@ -81,5 +81,3 @@ function loadAJAX (url) {
     success: parseJSON
   });
 }
-
-

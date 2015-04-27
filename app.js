@@ -10,7 +10,6 @@ app.set('json spaces', 4);
 
 app.use(express.static('public'));
 
-
 // the param method will map a placeholder variable to a callback
 // app.param('name', function (request, response, next) {
 //     var truckName = request.params.name;

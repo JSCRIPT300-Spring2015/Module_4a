@@ -6,8 +6,10 @@
 var express = require('express');
 var trucks = require('./trucks');
 var app = express();
+app.set('json spaces', 4);
 
 app.use(express.static('public'));
+
 
 // the param method will map a placeholder variable to a callback
 // app.param('name', function (request, response, next) {
@@ -30,7 +32,7 @@ app.get('/trucks/:name', function (request, response) {
 	if (!truck) {
         response.status(404).json('No food truck found for ' + request.params.name);
     } else {
-    	response.json(truck);
+    	response.json(truck);    	
     }   
 });
 

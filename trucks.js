@@ -547,7 +547,6 @@ var filterByFoodType = function(foodType){
 	return result;
 };
 
-
 var trucks = {
 	getTrucks : getTrucks,
 	getTruck : getTruck,
@@ -555,4 +554,5 @@ var trucks = {
 	filterByDay : filterByDay,
 	filterByFoodType : filterByFoodType
 };
+
 module.exports = trucks;

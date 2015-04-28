@@ -14,18 +14,23 @@ app.get('/trucks', function (request, response) {
 });
 // the 'name' parameter will be available on the request.params object
 app.get('/trucks/:name', function (request, response) {
-    var truck = request.params.name;
-    response.json(trucks.getTruck(truck));
+  var truck = request.params.name;
+  response.json(trucks.getTruck(truck));
 });
-//Foodtypes
+//All foodtypes
 app.get('/food-types', function (request, response) {
-    response.json(trucks.getFoodTypes());
+  var foodList = trucks.getFoodTypes();
+  var foodListHTML = '<h1>All Food Types</h1>';
+  foodList.forEach(function (foodType) {
+    foodListHTML += '<li><a href="/food-types/' + foodType + '/">' + foodType + '</a></li>';
+  });
+  response.send(foodListHTML);
 });
-//Foodtypes with name parameter
+//Foodtypes filtered by food parameter
 app.get('/food-types/:food', function (request, response) {
-    var foodType = request.params.food;
-    response.json(trucks.filterByFoodType(foodType));
+  var foodType = request.params.food;
+  response.json(trucks.filterByFoodType(foodType));
 });
 app.listen(3000, function () {
-    console.log('listening on port 3000');
+  console.log('listening on port 3000');
 });

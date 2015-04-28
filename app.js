@@ -26,13 +26,23 @@ app.get('/trucks/:name', function (request, response) {
 
 app.get('/food-types', function(request, response) {
 
-    var foodTypes = trucks.getFoodTypes()
+    var foodTypes = trucks.getFoodTypes();
     if (!foodTypes) {
     	response.status(404).json('No food available.');
     } else {
     	response.send(foodTypes);
     }
 });
+
+app.get('/trucks', function (request, response) {
+    
+    var allTrucks = trucks.getTrucks();
+    if(!allTrucks) {
+        response.status(404).json('No trucks available');
+    } else {
+        response.send(allTrucks);
+    }
+})
 
 app.listen(3000, function() {
 	console.log('Listening on port 3000');

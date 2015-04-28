@@ -505,7 +505,7 @@ var foodTrucks = [
 	}
 ];
 
-// this module should support the following methods:
+// this module supports the following methods:
 // getTrucks() - return all trucks
 // getTruck(name) - return the truck object matching 'name'
 // getFoodTypes() - return unique list of all associated food types (underscore has a function to help)

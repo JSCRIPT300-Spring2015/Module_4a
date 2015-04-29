@@ -1,4 +1,12 @@
-var foodTrucks = [
+var _ = require('underscore');
+
+var superTrucks = function(){
+	'use strict';
+	
+	//create object
+    var myObject = {};
+	
+	myObject.foodTrucks = [
 	{
 		name: '314 PIE',
 		type: ['Sweet and Savory Pies', 'Pie', 'Sweets'],
@@ -503,6 +511,44 @@ var foodTrucks = [
 	}
 ];
 
+
+	myObject.filterByDay = function(dayName){
+		var filteredTrucks = _.filter(this.foodTrucks,function(truck){
+			return (truck.schedule.indexOf(dayName)>-1);
+		});
+		return filteredTrucks;
+	};
+
+	myObject.getTrucks = function(){
+		return this.foodTrucks;
+	};
+	
+	myObject.getTruck = function(name){
+		var i=0;
+		for(i=0;i<this.foodTrucks.length;i++){
+			if(this.foodTrucks[i].name === name){
+				return this.foodTrucks[i];
+			}
+		}
+	};
+	
+	myObject.getFoodTypes = function (){
+		//munge together all the food types from all the trucks into an array push the value 
+		var mungeArray = [];
+		var foodTypeString = '';
+		var i=0;
+		for(i=0;i<this.foodTrucks.length;i++){
+			mungeArray = mungeArray.push(this.foodTrucks[i].type);
+		}
+		// use _.uniq(mungeArray) to get an array of unique food types
+		// then JSON.stringify(uniqueArray) to send out the JSON list of food types
+		foodTypeString = JSON.stringify(mungeArray);
+		return foodTypeString;
+	};
+	
+	return myObject;
+};
+module.exports = superTrucks;
 // this module should support the following methods:
 // getTrucks() - return all trucks
 // getTruck(name) - return the truck object matching 'name'

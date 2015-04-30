@@ -503,9 +503,122 @@ var foodTrucks = [
 	}
 ];
 
-// this module should support the following methods:
-// getTrucks() - return all trucks
-// getTruck(name) - return the truck object matching 'name'
-// getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
-// filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
-// filterByFoodType(foodType) - return trucks with associated 'foodType'
+/*
+ * Homework 
+ * JSCRIPT300-Spring2015/Module_4a
+ * by Diane Zevenbergen
+ */
+
+'use strict';
+
+var _ = require('underscore');
+
+/* 
+ * Function returns array object of food trucks available today.
+ * Uses underscore's filter() method.
+ */ 
+function filterByDay(day) {
+
+    // Filter returns the subset of foodTrucks that match 'day'
+    var todaysTrucks = _.filter(foodTrucks,function(item) {
+
+        // Exclude truck if object doesn't include 'schedule' prop, otherwise check for 'day' match
+        if (typeof item.schedule === 'undefined') {
+            return false;
+        } else {
+            return (item.schedule.indexOf(day) !== -1);
+        }        
+    });
+    
+    return todaysTrucks;
+}
+
+// Function returns all truck objects
+function getTrucks() {
+    return foodTrucks;
+}
+
+// Function returns object info for matching truck if found
+function getTruck(name) {
+    
+    // Loop thru food trucks array to find matching truck (note to self: could have used _.find)
+    for (var i = 0, l = foodTrucks.length; i < l; i += 1) {
+        if (foodTrucks[i].name.toLowerCase().trim() === name.toLowerCase().trim()) {
+            return foodTrucks[i];
+        }
+    }
+
+    // Return false if no match found in above loop
+    return false;
+}
+
+function getFoodTypes() {
+    var foodTypes = [];
+    var index = 0;
+    var a;
+    var b;
+    
+    // Loop thru food trucks array to create array of all food types
+    for (var i = 0, l = foodTrucks.length; i < l; i += 1) {
+        for (var j = 0, k = foodTrucks[i].type.length; j < k; j +=1) {
+            foodTypes[index] = foodTrucks[i].type[j];
+            index += 1;
+        }
+    } 
+
+    // Get unique items in list
+    var uniqueFoods = _.uniq(foodTypes, function (item) {
+        return item.toLowerCase();
+    });
+    
+    // Sort unique array alphabetically (found case-insensitive function on Stackoverflow)
+    uniqueFoods.sort(function (a, b) {
+        return a.toLowerCase().localeCompare(b.toLowerCase());
+    });
+        
+    // Return array of unique food types
+    return uniqueFoods;
+}
+
+// Function returns object info for matching food type (if found)
+// QUESTION:  Is there a better way with underscore to do this?
+function filterByFoodType(type) {
+    var matchingTrucks= [];
+    
+    type = type.toLowerCase();
+
+    // Loop through trucks & create array of truck objects that offer food type = 'type'
+    for (var i = 0, l = foodTrucks.length; i < l ; i += 1) {
+        
+        // Exclude truck if object doesn't include 'type' prop, otherwise check for match
+        if (typeof foodTrucks[i].type === 'undefined') {
+            continue;
+        } else {
+
+            // Each truck may have multiple food types - loop thru to look for type = 'type'
+            for (var j = 0, k = foodTrucks[i].type.length; j < k ; j +=1 ) {
+                if (foodTrucks[i].type[j].toLowerCase() === type) {
+                    matchingTrucks.push(foodTrucks[i]);
+                    break;
+                }
+            }
+        }
+    }
+
+    return matchingTrucks;    
+}
+
+module.exports = {
+    filterByDay: filterByDay,
+    getTrucks: getTrucks,
+    getTruck: getTruck,
+    getFoodTypes: getFoodTypes,
+    filterByFoodType: filterByFoodType
+};
+
+
+//console.log(filterByDay('Tuesday'));
+//console.log(getTrucks());
+//console.log(getTruck('El Camion'));
+//console.log(getFoodTypes());
+//console.log(filterByFoodType('hot dOgs'));

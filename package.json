@@ -1,0 +1,23 @@
+{
+  "name": "Truck_Api",
+  "version": "1.0.0",
+  "description": "For Washington JS Class 300",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thehindenburg/Module_4a.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thehindenburg/Module_4a/issues"
+  },
+  "homepage": "https://github.com/thehindenburg/Module_4a",
+  "dependencies": {
+    "express": "^4.12.3",
+    "lodash": "^3.7.0"
+  }
+}

@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 var foodTrucks = [
 	{
 		name: '314 PIE',
@@ -209,7 +211,7 @@ var foodTrucks = [
 	{
 		name: 'Buddha Bruddah',
 		type: ['Asian'],
-		schedule: ['Monday', 'Tuesday','Wednesday','Thursday', 'Friday'],
+		schedule: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
 		payment: ['Cash', 'Cards'],
 		description: 'Gourmet Asian mixed plates',
 		website: 'http://www.buddhabruddah.com',
@@ -262,7 +264,7 @@ var foodTrucks = [
 	{
 		name: 'Charlie\'s',
 		type: ['Burgers/Cheesesteaks', 'Burgers'],
-		schedule: ['Monday', 'Tuesday', 'Wednesday','Thursday'],
+		schedule: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
 		payment: ['Cash', 'Cards'],
 		description: 'A fresh take on American diner fare',
 		website: 'http://www.charliesbunsnstuff.com',
@@ -509,3 +511,65 @@ var foodTrucks = [
 // getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
 // filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
 // filterByFoodType(foodType) - return trucks with associated 'foodType'
+
+
+// getTrucks() - return all trucks
+//function getTrucks(day) {
+//	var sortedTrucks = _.filter(foodTrucks, function (item) {
+//
+//		if (typeof item.schedule === 'undefined') {
+//			return false;
+//		} else {
+//			return (item.schedule.indexOf(day) !== -1);
+//		}
+//	});
+//
+//	return sortedTrucks;
+//}
+function getTrucks() {
+	return foodTrucks;
+}
+
+
+// getTruck(name) - return the truck object matching 'name'
+function getTruck(name) {
+
+	for(var i = 0, l = foodTrucks.length; i < l; i++) {
+
+		// Loop through food trucks until you find the matching name. When you find the name, stop.
+		if (foodTrucks[i].name.toLowerCase() === name.toLowerCase()) {
+
+			// return entire object for truck
+			return foodTrucks[i];
+		}
+	}
+
+	return false;
+}
+
+
+// filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
+function filterByDay(day) {
+	// Filter returns the subset of foodTrucks that match 'day'
+	var sortedTrucks = _.filter(foodTrucks, function (item) {
+
+		// Exclude truck if object doesn't include 'schedule' prop, otherwise check for 'day' match
+		if (typeof item.schedule === 'undefined') {
+			return false;
+		} else {
+			return (item.schedule.indexOf(day) !== -1);
+		}
+	});
+
+	return sortedTrucks;
+}
+
+
+console.log(getTruck('314 PIE'));
+console.log(getTrucks('Wednesday'));
+console.log(filterByDay('Tuesday'));
+
+
+module.exports = getTruck();
+module.exports = getTrucks();
+module.exports = filterByDay();

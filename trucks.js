@@ -510,36 +510,34 @@ var foodTrucks = [
 // filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
 // filterByFoodType(foodType) - return trucks with associated 'foodType'
 
-var getTrucks = function(){
+function getTrucks(){
 	return foodTrucks;
 };
 
-var getTruck = function(name){
+function getTruck(name){
 	var rightTruck = _.find(foodTrucks, function(name){
 		return foodTruck.name === name;
 	});
 	return rightTruck;
 };
 
-var getFoodType = function(){
-	
+function getFoodType(){
+	return _.uniq(_.pluck(foodTrucks, 'type'));
 	
 };
 
-var filterByDay = function(day) {
-
+function filterByDay(day) {
 	var todayFoodTrucks = _.filter(foodTrucks, function(truck){
-		for (var i = 0; i < truck.schedule.length; i++){
-			return day === truck.schedule[i];
-		}
+			return _.contains(truck.schedule, day);
+		
 	});
 	return todayFoodTrucks;
 };
 
-var filterByFoodType = function(foodType){
+function filterByFoodType(foodType){
 	return _.filter(foodTrucks, function(truck){
-		return _.contains(truck.type, foodType)
-	})
+		return _.contains(truck.type, foodType);
+	});
 	
 };
 

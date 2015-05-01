@@ -5,23 +5,14 @@
 
 var express = require('express');
 var app = express();
-var trucks = {
-	'Athenas': 'Meditteranean', 'Beanfish': 'Asian', 'Marination': 'Hawaaian-Korean'
-};
+var trucks = require('./trucks');
+
 app.use(express.static('public'));
 
-app.get('/trucks/:name', function (request, response) {
-	var truck = request.params.name;
-	var foodType = trucks[request.params.name];
-
-	// capitalize first letter, make everything else lowercase
-	var foodTruck = truck[0].toUpperCase + truck.slice(1).toLowerCase();
-
-	if (!foodType) {
-		response.status(404).json('No food type found for ' + truck);
-	} else {
-		response.send(foodType);
-	}
+// Return a list of trucks, in JSON format
+app.get('/trucks', function (request, response) {
+	var truckList = trucks.getTrucks();
+	response.send(truckList);
 });
 
 app.listen(3000, function () {

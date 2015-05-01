@@ -505,6 +505,7 @@ var foodTrucks = [
 	}
 ];
 
+
 // this module should support the following methods:
 // getTrucks() - return all trucks
 // getTruck(name) - return the truck object matching 'name'
@@ -514,42 +515,64 @@ var foodTrucks = [
 
 
 // getTrucks() - return all trucks
-//function getTrucks(day) {
-//	var sortedTrucks = _.filter(foodTrucks, function (item) {
-//
-//		if (typeof item.schedule === 'undefined') {
-//			return false;
-//		} else {
-//			return (item.schedule.indexOf(day) !== -1);
-//		}
-//	});
-//
-//	return sortedTrucks;
-//}
 function getTrucks() {
 	return foodTrucks;
 }
 
 
 // getTruck(name) - return the truck object matching 'name'
-function getTruck(name) {
+//function getTruck(name) {
+//
+//	for (var i = 0, l = foodTrucks.length; i < l; i++) {
+//
+//		// Loop through food trucks until you find the matching name. When you find the name, stop.
+//		if (foodTrucks[i].name.toLowerCase() === name.toLowerCase()) {
+//
+//			// return entire object for truck
+//			return foodTrucks[i];
+//		}
+//	}
+//
+//	return false;
+//}
 
-	for(var i = 0, l = foodTrucks.length; i < l; i++) {
 
-		// Loop through food trucks until you find the matching name. When you find the name, stop.
-		if (foodTrucks[i].name.toLowerCase() === name.toLowerCase()) {
+// getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
+function getFoodTypes() {
 
-			// return entire object for truck
-			return foodTrucks[i];
+	// Returns list of food types for all trucks
+	var allFoodTypes = _.uniq(_.flatten(_.pluck(foodTrucks, 'type')));
+
+	allFoodTypes = _.sortBy(allFoodTypes, function (i) { return i.toLowerCase(); });
+
+	return allFoodTypes;
+}
+
+
+// filterByFoodType(foodType) - return trucks with associated 'foodType'
+function filterByFoodType(type) {
+
+	// Filter returns the type of food that match type
+	var matchingFoodTypes = _.filter(foodTrucks, function (item) {
+
+		if (typeof item.type === 'undefined') {
+			return false;
+		} else {
+			if (item.type.indexOf(type) === -1) {
+				return false;
+			} else {
+				return true;
+			}
 		}
-	}
+	});
 
-	return false;
+	return matchingFoodTypes;
 }
 
 
 // filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
 function filterByDay(day) {
+
 	// Filter returns the subset of foodTrucks that match 'day'
 	var sortedTrucks = _.filter(foodTrucks, function (item) {
 
@@ -565,11 +588,19 @@ function filterByDay(day) {
 }
 
 
-console.log(getTruck('314 PIE'));
-console.log(getTrucks('Wednesday'));
-console.log(filterByDay('Tuesday'));
+// TESTS
+//console.log(foodTrucks);
+//console.log(getTrucks());
+//console.log(getTruck('314 PIE'));
+//console.log(getFoodTypes());
+//console.log(filterByDay('Tuesday'));
+//console.log(filterByFoodType('Pie'));
 
 
-module.exports = getTruck();
-module.exports = getTrucks();
-module.exports = filterByDay();
+module.exports = {
+	filterByDay: filterByDay,
+	getTrucks: getTrucks,
+	//getTruck: getTruck,
+	getFoodTypes: getFoodTypes,
+	filterByFoodType: filterByFoodType
+};

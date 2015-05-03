@@ -520,21 +520,21 @@ function getTrucks() {
 }
 
 
-// getTruck(name) - return the truck object matching 'name'
-//function getTruck(name) {
-//
-//	for (var i = 0, l = foodTrucks.length; i < l; i++) {
-//
-//		// Loop through food trucks until you find the matching name. When you find the name, stop.
-//		if (foodTrucks[i].name.toLowerCase() === name.toLowerCase()) {
-//
-//			// return entire object for truck
-//			return foodTrucks[i];
-//		}
-//	}
-//
-//	return false;
-//}
+//getTruck(name) - return the truck object matching 'name'
+function getTruck(name) {
+
+	for (var i = 0, l = foodTrucks.length; i < l; i++) {
+
+		// Loop through food trucks until you find the matching name. When you find the name, stop.
+		if (foodTrucks[i].name.toLowerCase() === name.toLowerCase()) {
+
+			// return entire object for truck
+			return foodTrucks[i];
+		}
+	}
+
+	return false;
+}
 
 
 // getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
@@ -600,7 +600,7 @@ function filterByDay(day) {
 module.exports = {
 	filterByDay: filterByDay,
 	getTrucks: getTrucks,
-	//getTruck: getTruck,
+	getTruck: getTruck,
 	getFoodTypes: getFoodTypes,
 	filterByFoodType: filterByFoodType
 };

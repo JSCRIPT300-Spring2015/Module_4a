@@ -5,6 +5,7 @@
 
 var express = require('express');
 var app = express();
+
 var trucks = require('./trucks');
 
 app.use(express.static('public'));
@@ -13,6 +14,19 @@ app.use(express.static('public'));
 app.get('/trucks', function (request, response) {
 	var truckList = trucks.getTrucks();
 	response.send(truckList);
+});
+
+// Return a list of food types, in JSON format
+app.get('/food-types', function (request, response) {
+	var foodTypes = trucks.getFoodTypes();
+	response.send(foodTypes);
+});
+
+// Return a list of truck names, in JSON format
+app.get('/trucks/:name', function (request, response) {
+	var truckName = request.params.name;
+	var getTruckName = trucks.getTruck(truckName);
+	response.send(getTruckName);
 });
 
 app.listen(3000, function () {

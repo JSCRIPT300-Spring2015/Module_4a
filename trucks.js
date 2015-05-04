@@ -1,3 +1,5 @@
+var _und = require('underscore');
+
 var foodTrucks = [
 	{
 		name: '314 PIE',
@@ -509,18 +511,56 @@ var truckCalls = {
 
 
 	// getTruck(name) - return the truck object matching 'name'
-	getTruck: function(name) {
+	getTrucks: function(name) {
+
 		for (truck in foodTrucks) {
+			if (foodTrucks[truck]['name'] === name) {
+
+					return foodTrucks[truck];
+				}
+				
+			}
+		},
+
+	// getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
+	getFoodTypes: function() {
+		allTypes = [];
+		for (truck in foodTrucks) {
+			for (foodType in foodTrucks[truck]['type']) {
+				allTypes.push(foodTrucks[truck]['type'][foodType]);	
+			}
+		}
+
+		// return only unique values of food types
+		return _und.uniq(allTypes);
+	},
+
+
+	// filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
+	filterByDay: function(requestedDay) {
+		var openTrucks = [];
+		for (truck in foodTrucks) {
+			openDays = foodTrucks[truck]['schedule'];
 			if (_und.contains(openDays, requestedDay)) {
 				openTrucks.push(foodTrucks[truck]['name']);
 			}
 		}
-		return foodTrucks[name]
-	}
 
-	// getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
-	// filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
+		return openTrucks;
+	}, 
+
+
+
 	// filterByFoodType(foodType) - return trucks with associated 'foodType'	
+	filterByFoodType: function(foodType) {
+		var matchingTrucks = [];
+		for (truck in foodTrucks) {
+			truckType = foodTrucks[truck]['type']
+			if (_und.contains(truckType, foodType)) {
+				matchingTrucks.push(foodTrucks[truck]['name']);
+			}
+		}
 
-}
-
+		return matchingTrucks;
+	}
+};

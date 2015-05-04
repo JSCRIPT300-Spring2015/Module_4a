@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/bricegnichols/Module_4a",
   "dependencies": {
-    "express": "^4.12.3"
+    "express": "^4.12.3",
+    "underscore": "^1.8.3"
   }
 }

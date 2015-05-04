@@ -209,7 +209,7 @@ var foodTrucks = [
 	{
 		name: 'Buddha Bruddah',
 		type: ['Asian'],
-		schedule: ['Monday', 'Tuesday','Wednesday','Thursday', 'Friday'],
+		schedule: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
 		payment: ['Cash', 'Cards'],
 		description: 'Gourmet Asian mixed plates',
 		website: 'http://www.buddhabruddah.com',
@@ -262,7 +262,7 @@ var foodTrucks = [
 	{
 		name: 'Charlie\'s',
 		type: ['Burgers/Cheesesteaks', 'Burgers'],
-		schedule: ['Monday', 'Tuesday', 'Wednesday','Thursday'],
+		schedule: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
 		payment: ['Cash', 'Cards'],
 		description: 'A fresh take on American diner fare',
 		website: 'http://www.charliesbunsnstuff.com',
@@ -509,3 +509,40 @@ var foodTrucks = [
 // getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
 // filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
 // filterByFoodType(foodType) - return trucks with associated 'foodType'
+var _ = require('underscore');
+
+function getTrucks() {
+    return foodTrucks;
+}
+
+function getTruck(name) {
+    var trucks = _.filter(foodTrucks, function (truck) {
+        return _.contains(truck.name, name);
+    });
+}
+
+function getFoodTypes() {
+    return _.uniq(foodTrucks.type);
+}
+
+function filterByDay(day) {
+    var trucks = _.filter(foodTrucks, function (truck) {
+        return _.contains(truck.schedule, day);
+    });
+    return trucks;
+}
+
+function filterByFoodType(foodType) {
+    var trucks = _.filter(foodTrucks, function (truck) {
+        return _.contains(truck.type, foodType);
+    });
+}
+
+
+module.exports = {
+    getTrucks: getTrucks,
+    getTruck: getTruck,
+    getFoodTypes: getFoodTypes,
+    filterByDay: filterByDay,
+    filterByFoodType: filterByFoodType
+}

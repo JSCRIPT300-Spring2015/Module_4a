@@ -20,11 +20,11 @@ app.get('/trucks', function (request, response) {
 	response.json(trucks.truckCalls.getTrucks());
 })
 
-// the 'name' parameter will be available on the request.params object
+// return the truck object if name is passed as url
 app.get('/trucks/:name', function (request, response) {
     var truck = request.params.name;
     var foodType = trucks[request.params.name];
-    response.send(foodType);
+    response.send(trucks.truckCalls.getTruck(truck));
 });
 app.listen(3000, function () {
     console.log('listening on port 3000');

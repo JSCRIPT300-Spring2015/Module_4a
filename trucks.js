@@ -538,13 +538,24 @@ var superTrucks = function(){
 		var foodTypeString = '';
 		var i=0;
 		for(i=0;i<this.foodTrucks.length;i++){
-			mungeArray = mungeArray.push(this.foodTrucks[i].type);
+			//type is an array so have to union it in (plus that gets us unique)
+			mungeArray = _.union(mungeArray,this.foodTrucks[i].type);
 		}
-		// use _.uniq(mungeArray) to get an array of unique food types
+		mungeArray = _.sortBy(mungeArray);
 		// then JSON.stringify(uniqueArray) to send out the JSON list of food types
 		foodTypeString = JSON.stringify(mungeArray);
 		return foodTypeString;
 	};
+	
+	
+	myObject.filterByFoodType = function(type){
+		var filteredTrucks = _.filter(this.foodTrucks,function(truck){
+			return (truck.type.indexOf(type)>-1);
+		});
+		console.log(filteredTrucks);
+		return filteredTrucks;
+	};
+	
 	
 	return myObject;
 };

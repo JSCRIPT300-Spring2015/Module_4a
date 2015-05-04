@@ -12,7 +12,7 @@ var serveStatic = express.static('public');
 
 app.use(serveStatic);
 
-var pageContent = 'Today is . Here are the available food trucks:';
+//var pageContent = 'Today is . Here are the available food trucks:';
 //when this route handler fires
 
 var trucks = require('./trucks');
@@ -20,9 +20,12 @@ var truckObject = trucks();
 //var dayTrucks = truckObject.filterByDay(dayName);
 
 app.get('/trucks',function(request,response){
-	
- response.send(pageContent);
- 
+	var truckList = truckObject.getTrucks();
+	var nameString = '';
+  for(i=0;i<truckList.length;i++){
+	nameString = nameString + truckList[i].name + '<br>';
+  }
+  response.send(nameString);
 });
 
 
@@ -30,21 +33,44 @@ app.get('/trucks',function(request,response){
 app.get('/trucks/:name',function(request,response){
 
   //grab the name from the url ex)http://localhost:3000/trucks/TedsTruck gets foodTruck='TedsTruck'
+  //name, food-type, payment methods accepted, description, website, and schedule.
   var foodTruckName = request.params.name;
   var foodTruck = truckObject.getTruck(foodTruckName);
+  var returnString = '';
+  var truckName = foodTruck.name; //string
+  var foodType = foodTruck.type; //array
+  var payMethod = foodTruck.payment;  //array
+  var truckDesc = foodTruck.description; //string
+  var truckSite = foodTruck.website; //string
+  var truckSchedule = foodTruck.schedule; //array
   
-  response.send('that truck serves '+foodTruck.type);
+  returnString = 'to be created';
+  
+  response.send(returnString);
   
 });
 
 
-app.get('/trucks/foodtypes',function(request,response){
-  var foodTypes = truckObject.getFoodTypes();
-  
-  response.send('hello');
-  
+app.get('/food-types',function(request,response){
+
+  var foodTypes = JSON.parse(truckObject.getFoodTypes());
+  var foodString = '';
+  for(i=0;i<foodTypes.length;i++){
+	foodString = foodString + foodTypes[i] + '<br>';
+  }
+  response.send(foodString);
 });
 
+
+app.get('/trucksfood/:name',function(request,response){
+	var foodName = request.params.name;
+  var filteredTrucks = truckObject.filterByFoodType(foodName);
+  var nameString = '';
+  for(i=0;i<filteredTrucks.length;i++){
+	nameString = nameString + filteredTrucks[i].name + '<br>';
+  }
+  response.send(nameString);
+});
 
 app.listen(3000,function(){
 

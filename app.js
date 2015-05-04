@@ -1,10 +1,8 @@
 //  in this file create an express application - use the middle-ware built into express
 var express = require('express');
-
-var express = require('express');
 var trucks = require('./trucks');
-
 var idManager = require('./idManager');
+
 idManager.setIds(trucks.getTrucks());
 
 var bodyParser = require('body-parser');

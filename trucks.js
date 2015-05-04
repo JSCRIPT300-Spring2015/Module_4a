@@ -506,12 +506,24 @@ var foodTrucks = [
 ];
 
 // this module should support the following methods:
-// getTrucks() - return all trucks
+
 var truckCalls = {
 
+	// getTrucks() - return all trucks
+	getTrucks: function() {
+
+		var allTrucks = [];
+		
+		for (truck in foodTrucks) {
+			allTrucks.push(foodTrucks[truck]['name'])
+		}
+
+		return allTrucks;
+	}, 
+	
 
 	// getTruck(name) - return the truck object matching 'name'
-	getTrucks: function(name) {
+	getTruck: function(name) {
 
 		for (truck in foodTrucks) {
 			if (foodTrucks[truck]['name'] === name) {

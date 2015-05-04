@@ -518,7 +518,7 @@ var truckCalls = {
 
 					return foodTrucks[truck];
 				}
-				
+
 			}
 		},
 
@@ -564,3 +564,5 @@ var truckCalls = {
 		return matchingTrucks;
 	}
 };
+
+module.exports.truckCalls = truckCalls;

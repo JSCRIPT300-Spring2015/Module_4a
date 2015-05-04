@@ -505,7 +505,22 @@ var foodTrucks = [
 
 // this module should support the following methods:
 // getTrucks() - return all trucks
-// getTruck(name) - return the truck object matching 'name'
-// getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
-// filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
-// filterByFoodType(foodType) - return trucks with associated 'foodType'
+var truckCalls = {
+
+
+	// getTruck(name) - return the truck object matching 'name'
+	getTruck: function(name) {
+		for (truck in foodTrucks) {
+			if (_und.contains(openDays, requestedDay)) {
+				openTrucks.push(foodTrucks[truck]['name']);
+			}
+		}
+		return foodTrucks[name]
+	}
+
+	// getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
+	// filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
+	// filterByFoodType(foodType) - return trucks with associated 'foodType'	
+
+}
+

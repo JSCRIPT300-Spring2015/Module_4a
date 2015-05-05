@@ -21,11 +21,12 @@ var truckObject = trucks();
 
 app.get('/trucks',function(request,response){
 	var truckList = truckObject.getTrucks();
-	var nameString = '';
-  for(i=0;i<truckList.length;i++){
-	nameString = nameString + truckList[i].name + '<br>';
-  }
-  response.send(nameString);
+	response.send(JSON.stringify(truckList));
+//	var nameString = '';
+ // for(i=0;i<truckList.length;i++){
+//	nameString = nameString + truckList[i].name + '<br>';
+//  }
+ // response.send(nameString);
 });
 
 
@@ -36,29 +37,79 @@ app.get('/trucks/:name',function(request,response){
   //name, food-type, payment methods accepted, description, website, and schedule.
   var foodTruckName = request.params.name;
   var foodTruck = truckObject.getTruck(foodTruckName);
-  var returnString = '';
+  var truckHTML = '';
   var truckName = foodTruck.name; //string
+  
   var foodType = foodTruck.type; //array
+  var foodString = '';
+  if(foodType){
+	// build the foodString - taking into account if blank, one entry, or many
+	if(foodType.length===0){
+		foodString = 'no entry found';
+	}else if(foodType.length>0){
+		foodString = foodType[0];
+		if(foodType.length>1){
+			for(i=1;i<foodType.length;i++){
+				foodString = foodString + ', ' + foodType[i];
+			}
+		}
+	}
+  }else{
+	foodString = 'no foodtypes listed';
+  }
+  
   var payMethod = foodTruck.payment;  //array
+  var payString = '';
+  if(payMethod){
+		// build the payString - taking into account if blank, one entry, or many
+		payString = payMethod[0];
+		if(payMethod.length>1){
+			for(i=1;i<payMethod.length;i++){
+				payString = payString + ', ' + payMethod[i];
+			}
+		}
+  }else{
+	  payString = 'No payment methods listed.';
+  }
+ 
   var truckDesc = foodTruck.description; //string
+  if(truckDesc === undefined){
+	  truckDesc = 'No description available.';
+  }
   var truckSite = foodTruck.website; //string
+  if(truckSite === undefined){
+	truckSite = 'No website available.';
+  }
   var truckSchedule = foodTruck.schedule; //array
+  var schedString = '';
+  if(truckSchedule){
+      // build the payString - taking into account if blank, one entry, or many
+	schedString = truckSchedule[0];
+	if(truckSchedule.length>1){
+		for(i=1;i<truckSchedule.length;i++){
+			schedString = schedString + ', ' + truckSchedule[i];
+		}
+	}
+  }else{
+	  schedString = 'No schedule available for this truck.';
+  }
   
-  returnString = 'to be created';
+  truckHTML = '<ul><li>Truck Name: ' + foodTruckName + '</li><li>Foods: ' + foodString + '</li><li>Payments: ' + payString + '</li><li>Description: ' + truckDesc + '</li><li>Website: ' + truckSite + '</li><li>Schedule: ' + schedString + '</li>';
   
-  response.send(returnString);
+  response.send(truckHTML);
   
 });
 
 
 app.get('/food-types',function(request,response){
 
-  var foodTypes = JSON.parse(truckObject.getFoodTypes());
-  var foodString = '';
-  for(i=0;i<foodTypes.length;i++){
-	foodString = foodString + foodTypes[i] + '<br>';
-  }
-  response.send(foodString);
+  var foodTypes = truckObject.getFoodTypes();
+ // var foodString = '';
+ // for(i=0;i<foodTypes.length;i++){
+//	foodString = foodString + foodTypes[i] + '<br>';
+ // }
+ // response.send(foodString);
+ response.send(foodTypes);
 });
 
 

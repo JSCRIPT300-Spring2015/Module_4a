@@ -15,9 +15,35 @@ app.get('/', function (request, response) {
 
 app.get('/trucks/:name', function (request, response) {
     var truck = foodTrucks.getTruck(request.params.name);
+    var list;
+    
+    if (truck.name) {
+        list += "<li>Name: " + truck.name;
+    }
+    
+    if (truck.type) {
+        list += "<li>Type: " + truck.type;
+    }
+    
+    if (truck.schedule) {
+        list += "<li>Schedule: " + truck.schedule;
+    }
+    
+    if (truck.payment) {
+        list += "<li>Payment: " + truck.payment;
+    }
+    
+    if (truck.description) {
+        list += "<li>Description: " + truck.description;
+    }
+    
+    if (truck.Facebook) {
+        list += "<li>Facebook: " + truck.Facebook;   
+    }
     response.send(truck);
+});
+        
     //resonse.redirect('/food-trucks');
-    //response.send(truck);
     //var foodType = foodTrucks[request.params.name];
     
     //if (!foodType) {

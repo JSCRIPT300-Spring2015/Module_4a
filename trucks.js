@@ -546,3 +546,22 @@ module.exports = {
     filterByDay: filterByDay,
     filterByFoodType: filterByFoodType
 }
+
+// Tests
+/*
+var foo = getTrucks();
+var message;
+for (var i = 0; i < foo.length; i++) {
+    message += foo[i].name + " ";
+}
+alert(message);
+alert(getTruck('cream'));
+
+var bar = getFoodTypes();
+var message1;
+for (var j = 0; j < foo.length; j++) {
+    message1 += foo[j] + " ";
+}
+alert(message1);
+
+alert(filterByFoodType('Sweets'));*/

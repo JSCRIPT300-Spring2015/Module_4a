@@ -503,6 +503,29 @@ var foodTrucks = [
 	}
 ];
 
+var _ = require('underscore');
+
+function getTrucks () {
+	return foodTrucks;
+}
+function getTruck(name) {
+	return _.find(foodTrucks, function(truck){
+		return truck.name === name;	
+	});
+}
+function getFoodTypes () {
+	return _.uniq(_.flatten(_.map(foodTrucks, function(truck){
+		return truck.type;
+	})));
+}
+
+module.exports = {
+	getTrucks: getTrucks,
+	getTruck: getTruck,
+	getFoodTypes: getFoodTypes
+}
+
+
 // this module should support the following methods:
 // getTrucks() - return all trucks
 // getTruck(name) - return the truck object matching 'name'

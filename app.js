@@ -8,9 +8,9 @@ var port = process.env.PORT || 3000;
 var serveStatic = express.static('public');
 app.use(serveStatic);
 
-var idManager = require('./idManager');
+//var idManager = require('./idManager');
 
-idManager.setIds(trucks.getTrucks());
+//idManager.setIds(trucks.getTrucks());
 
 var bodyParser = require('body-parser');
 

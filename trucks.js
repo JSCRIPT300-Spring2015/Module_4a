@@ -634,50 +634,56 @@ function filterByDay(day){
 }
                   
 function getTrucks() {
-  return truckList;
+  return foodTrucks;
 }
 
-function getTruck(id) {
-    id = parseInt(id, 10);
-    return _.find(truckList, function(truck) {
-            return truck._id === id;
+function getTruck(name) {
+  var foundTruck;  
+  
+    foundTruck = _.find(foodTrucks, function(truck) {
+            return truck.name === name;
     });
+  return foundTruck;
 }
 
 function getFoodTypes() {
-  return typeList;
+        var masterList = _.map(foodTrucks, function (truck) {
+        return truck.type;
+  });
+        var flattenedArrays = _.flatten(masterList);
+        var uniqList = _.uniq(flattenedArrays);
+        return uniqList;
 }
 
-function filterByFoodTypes(){
-//  var trucksFilter = _.filter(foodTrucks, function(day));  
-    return _.filter(typeList, function(truck){
-          return _.contains(truck.type);
+function filterByFoodType(type){  
+    return _.filter(foodTrucks, function (truck) {
+          return _.contains(truck.type, type);
     });
 }
 
-function addTruck(truck){
-    if (truck){
-      truckList.push(truck);
-    }
-}
-
-function removeTruck(id) {
-    id = parseInt(id, 10);
-    var index = _.findIndex(truckList, function (truck) {
-        return truck._id === id;
-    });
-    
-    bookTruck.splice(index, 1);
-}
+//function addTruck(truck){
+//    if (truck){
+//      foodTrucks.push(truck);
+//    }
+//}
+//
+//function removeTruck(id) {
+//    id = parseInt(id, 10);
+//    var index = _.findIndex(foodTrucks, function (truck) {
+//        return truck._id === id;
+//    });
+//    
+//    bookTruck.splice(index, 1);
+//}
 
 module.exports = {
   filterByDay:       filterByDay,
   getTrucks:         getTrucks,
   getTruck:          getTruck,
   getFoodTypes:      getFoodTypes,
-  filterByFoodTypes: filterByFoodTypes,
-  addTruck:          addTruck,
-  removeTruck:       removeTruck
+  filterByFoodType:  filterByFoodType
+//  addTruck:          addTruck,
+//  removeTruck:       removeTruck
 };
 // this module should support the following methods:
 // getTrucks() - return all trucks

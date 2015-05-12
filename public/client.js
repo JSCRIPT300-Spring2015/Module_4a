@@ -6,8 +6,4 @@ $(function () {
  		});
  		$('.truck-list').append(truckList);
     });
-    
-   // $.get('/food-types', function(trucks) {
-        
-    //}
 });

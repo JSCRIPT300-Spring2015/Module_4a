@@ -509,31 +509,52 @@ var foodTrucks = [
 // getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
 // filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
 // filterByFoodType(foodType) - return trucks with associated 'foodType'
+
+// underscore.js module
 var _ = require('underscore');
 
+// getTrucks() - return all trucks
 function getTrucks() {
+    console.log('In getTrucks()');
     return foodTrucks;
 }
 
+// getTruck(name) - return the truck object matching 'name'
 function getTruck(name) {
-    var trucks = _.filter(foodTrucks, function (truck) {
-        return _.contains(truck.name, name);
+    console.log('In getTruck()');
+    var trucks = _.find(foodTrucks, function (truck) {
+        return truck.name == name;
     });
+    return trucks;
 }
 
+// getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
 function getFoodTypes() {
-    return _.uniq(foodTrucks.type);
+    console.log('In getFoodTypes()');
+    // create a list of all the food types
+    var list = _.map(foodTrucks, function (truck) {
+        return truck.type;
+    });
+    
+    // flatten the list so it's not an arrays within the list array
+    flatList = _.flatten(list);
+    
+    // return a list of unique types
+    return _.uniq(flatList);
 }
 
+// filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
 function filterByDay(day) {
+    console.log('In filterByDay(day)');
     var trucks = _.filter(foodTrucks, function (truck) {
         return _.contains(truck.schedule, day);
     });
     return trucks;
 }
-
+// filterByFoodType(foodType) - return trucks with associated 'foodType'
 function filterByFoodType(foodType) {
-    var trucks = _.filter(foodTrucks, function (truck) {
+    console.log('In filterByFoodType(foodType)');
+    return _.filter(foodTrucks, function (truck) {
         return _.contains(truck.type, foodType);
     });
 }
@@ -546,22 +567,3 @@ module.exports = {
     filterByDay: filterByDay,
     filterByFoodType: filterByFoodType
 }
-
-// Tests
-/*
-var foo = getTrucks();
-var message;
-for (var i = 0; i < foo.length; i++) {
-    message += foo[i].name + " ";
-}
-alert(message);
-alert(getTruck('cream'));
-
-var bar = getFoodTypes();
-var message1;
-for (var j = 0; j < foo.length; j++) {
-    message1 += foo[j] + " ";
-}
-alert(message1);
-
-alert(filterByFoodType('Sweets'));*/

@@ -209,7 +209,7 @@ var foodTrucks = [
 	{
 		name: 'Buddha Bruddah',
 		type: ['Asian'],
-		schedule: ['Monday', 'Tuesday','Wednesday','Thursday', 'Friday'],
+		schedule: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
 		payment: ['Cash', 'Cards'],
 		description: 'Gourmet Asian mixed plates',
 		website: 'http://www.buddhabruddah.com',
@@ -262,7 +262,7 @@ var foodTrucks = [
 	{
 		name: 'Charlie\'s',
 		type: ['Burgers/Cheesesteaks', 'Burgers'],
-		schedule: ['Monday', 'Tuesday', 'Wednesday','Thursday'],
+		schedule: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
 		payment: ['Cash', 'Cards'],
 		description: 'A fresh take on American diner fare',
 		website: 'http://www.charliesbunsnstuff.com',
@@ -509,3 +509,61 @@ var foodTrucks = [
 // getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
 // filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
 // filterByFoodType(foodType) - return trucks with associated 'foodType'
+
+// underscore.js module
+var _ = require('underscore');
+
+// getTrucks() - return all trucks
+function getTrucks() {
+    console.log('In getTrucks()');
+    return foodTrucks;
+}
+
+// getTruck(name) - return the truck object matching 'name'
+function getTruck(name) {
+    console.log('In getTruck()');
+    var trucks = _.find(foodTrucks, function (truck) {
+        return truck.name == name;
+    });
+    return trucks;
+}
+
+// getFoodTypes() - return unique list of all associated food types (underscore has a function to help)
+function getFoodTypes() {
+    console.log('In getFoodTypes()');
+    // create a list of all the food types
+    var list = _.map(foodTrucks, function (truck) {
+        return truck.type;
+    });
+    
+    // flatten the list so it's not an arrays within the list array
+    flatList = _.flatten(list);
+    
+    // return a list of unique types
+    return _.uniq(flatList);
+}
+
+// filterByDay(day) - return trucks with 'day' in schedule (use your filterByDay function from Module 3 homework)
+function filterByDay(day) {
+    console.log('In filterByDay(day)');
+    var trucks = _.filter(foodTrucks, function (truck) {
+        return _.contains(truck.schedule, day);
+    });
+    return trucks;
+}
+// filterByFoodType(foodType) - return trucks with associated 'foodType'
+function filterByFoodType(foodType) {
+    console.log('In filterByFoodType(foodType)');
+    return _.filter(foodTrucks, function (truck) {
+        return _.contains(truck.type, foodType);
+    });
+}
+
+
+module.exports = {
+    getTrucks: getTrucks,
+    getTruck: getTruck,
+    getFoodTypes: getFoodTypes,
+    filterByDay: filterByDay,
+    filterByFoodType: filterByFoodType
+}

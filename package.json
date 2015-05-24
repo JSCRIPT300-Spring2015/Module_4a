@@ -1,0 +1,23 @@
+{
+  "name": "module_4a",
+  "version": "1.0.0",
+  "description": "homework",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/catfriend/Module_4a.git"
+  },
+  "author": "catfriend",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/catfriend/Module_4a/issues"
+  },
+  "homepage": "https://github.com/catfriend/Module_4a#readme",
+  "dependencies": {
+    "express": "^4.12.4",
+    "underscore": "^1.8.3"
+  }
+}
